@@ -1,0 +1,332 @@
+.button-box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Heading inside the button box */
+.button-box h5 {
+    font-size: large;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* Dashboard.css */
+.card-custom {
+    border-radius: 12px;
+    /* Smooth rounded corners */
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-custom:hover {
+    transform: translateY(-3px);
+    /* Slight lift on hover */
+    box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.chart-card {
+    border-radius: 12px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.chart-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Buttons inside the button box */
+.button-box .btn-custom {
+    background-color: #013866;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    flex: 1;
+    /* Makes buttons take equal space */
+    text-align: center;
+}
+
+.button-box .btn-custom:hover {
+    background-color: #023e6f;
+}
+
+/* Ensures buttons are spaced properly */
+.button-box .d-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ============ Modal Styling ============ */
+.expense-modal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    border: none;
+    background-color: #fafafa;
+}
+
+/* Modal Title */
+.modal-title-custom {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #f6f2fa;
+}
+
+/* Form Label */
+.form-label-custom {
+    font-weight: 600;
+    color: #6c757d;
+}
+
+/* Input Fields */
+.form-control-custom {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control-custom:focus {
+    border-color: #e9e5ee;
+    box-shadow: 0px 4px 8px rgba(155, 93, 229, 0.2);
+}
+
+/* Buttons */
+.btn-cancel {
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-cancel:hover {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.btn-add-expense {
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 500;
+    border: none;
+    transition: 0.3s;
+}
+
+
+/* ============ Global Shadow Styles ============ */
+.shadow-light {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-medium {
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-dark {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* ============ Card Styling ============ */
+.card-custom {
+    border-radius: 12px;
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    background: #fff;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+    /* Medium shadow */
+}
+
+.card-custom:hover {
+    box-shadow: 0px 10px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* ============ Sidebar Shadow ============ */
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 3px 0px 12px rgba(0, 0, 0, 0.1);
+    /* Light shadow to right */
+}
+
+/* ============ Buttons ============ */
+.btn-custom {
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-weight: 500;
+    transition: 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+    /* Soft button shadow */
+}
+
+.btn-custom:hover {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+/* ============ Modal Shadow ============ */
+.expense-modal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    /* Darker modal shadow */
+    background-color: #fafafa;
+}
+
+
+/* ============ Button Styling ============ */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn-custom {
+    flex-grow: 1;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+    background: linear-gradient(to right, #5a189a, #9b5de5);
+    border: none;
+    color: white;
+}
+
+.btn-custom:hover {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    background: linear-gradient(to right, #9b5de5, #5a189a);
+}
+
+/* ============ Card Shadows ============ */
+.card-custom {
+    border-radius: 12px;
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    background: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.shadow-light {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-medium {
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-dark {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* ============ Modal Styling ============ */
+.expense-modal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #fafafa;
+}
+
+/* ======= Modal Styling ======= */
+.expense-modal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.25);
+    background-color: #fdfdfd;
+    padding: 20px;
+}
+
+.modal-title-custom {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.form-label-custom {
+    font-weight: 600;
+    color: #555;
+}
+
+.form-control-custom {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.btn-cancel {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 16px;
+}
+
+.btn-add-expense {
+    background-color: #5a189a;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 16px;
+}
+
+.btn-add-expense:hover {
+    background-color: #9b5de5;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    /* Fixed sidebar width */
+    height: 100vh;
+    /* Full height */
+    position: fixed;
+    /* Sticks to the left */
+    top: 0;
+    left: 0;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+}
+
+/* Dashboard content must NOT overlap */
+.dashboard-content {
+    margin-left: 250px;
+    /* Push content to the right of sidebar */
+    padding: 20px;
+    width: calc(100% - 250px);
+    /* Adjust width dynamically */
+}

@@ -1,0 +1,121 @@
+/* Container */
+.expenses-container {
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Title */
+.expenses-title {
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+/* Grid Layout for Cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Card Styling */
+.expenses-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
+}
+
+.expenses-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Filter Card */
+.filter-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Filter Form */
+.filter-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-input {
+    flex: 1;
+    min-width: 180px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Apply Button */
+.apply-button {
+    background-color: #6c5ce7;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.apply-button:hover {
+    background-color: #4b42c2;
+}
+
+/* Expenses List */
+.expenses-list-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Table */
+.expenses-table {
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Subtle Category Colors */
+.category {
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Soft Pastel Category Colors */
+.category.food {
+    background-color: #fde2e4;
+    color: #d7263d;
+}
+
+.category.transport {
+    background-color: #d4eaff;
+    color: #187bcd;
+}
+
+.category.entertainment {
+    background-color: #fef3c7;
+    color: #e4a11b;
+}
+
+.category.shopping {
+    background-color: #e7e9fc;
+    color: #6366f1;
+}

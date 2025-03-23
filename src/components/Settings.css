@@ -1,0 +1,86 @@
+/* Main Container */
+.settings-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Cards */
+.settings-card {
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.settings-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Form Controls */
+.settings-card input,
+.settings-card select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Buttons */
+.settings-card button {
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Danger Zone */
+.danger-zone {
+    border-left: 5px solid #dc3545;
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.danger-zone button {
+    background: #dc3545;
+    border: none;
+}
+
+.danger-zone button:hover {
+    background: #c82333;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode .settings-card {
+    background: #1e1e1e;
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .danger-zone {
+    background: #4d0000;
+    color: #ffcccc;
+}
+
+.dark-mode button {
+    background: #333;
+    color: white;
+    border: none;
+}
+
+.dark-mode button:hover {
+    background: #555;
+}
