@@ -1,67 +1,103 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import { addIncome } from "../api";
 
 interface NewIncomeModalProps {
-    show: boolean;
-    handleClose: () => void;
-    triggerConfetti: () => void; // ✅ Added prop
+  show: boolean;
+  handleClose: () => void;
+  triggerConfetti: () => void;
 }
 
 const NewIncomeModal: React.FC<NewIncomeModalProps> = ({ show, handleClose, triggerConfetti }) => {
-    const [submitted, setSubmitted] = useState(false);
+  const [amount, setAmount] = useState("");
+  const [source, setSource] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [message, setMessage] = useState("");
 
-    const handleSubmit = () => {
-        setSubmitted(true);
-        triggerConfetti(); // 🎉 Trigger full-screen confetti
+  const handleSubmit = async () => {
+    // Prevent duplicate submissions
+    if (submitted) return;
+    
+    try {
+      const response = await addIncome({ date, amount, source, description });
+      setMessage(response.message);
+      setSubmitted(true);
+      triggerConfetti();
+      setTimeout(() => {
+        setSubmitted(false);
+        setMessage("");
+        handleClose();
+      }, 3000);
+    } catch (err: any) {
+      setMessage(err.response?.data?.error || "Failed to add income.");
+    }
+  };
 
-        setTimeout(() => {
-            setSubmitted(false);
-            handleClose();
-        }, 3000); // Closes modal after 3 seconds
-    };
-
-    return (
-        <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton>
-                <Modal.Title>New Income</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-                {submitted ? (
-                    <div className="text-center fade-in">
-                        ✅ Income Added Successfully!
-                    </div>
-                ) : (
-                    <Form>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Income Amount (₹)</Form.Label>
-                            <Form.Control type="number" placeholder="Enter amount received" />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Source of Income</Form.Label>
-                            <Form.Control type="text" placeholder="E.g., Salary, Freelancing, Gift" />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Date Received</Form.Label>
-                            <Form.Control type="date" />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control as="textarea" rows={3} placeholder="Enter details" />
-                        </Form.Group>
-                    </Form>
-                )}
-            </Modal.Body>
-
-            <Modal.Footer>
-                <Button variant="outline-secondary" onClick={handleClose}>Cancel</Button>
-                <Button variant="primary" onClick={handleSubmit}>Add Income</Button>
-            </Modal.Footer>
-        </Modal>
-    );
+  return (
+    <Modal show={show} onHide={handleClose} centered className="income-modal">
+      <Modal.Header closeButton>
+        <Modal.Title className="modal-title-custom">New Income</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {submitted ? (
+          <div className="text-center fade-in">✅ Income Added Successfully!</div>
+        ) : (
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Income Amount (₹)</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter amount received"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Source of Income</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="E.g., Salary, Freelancing, Gift"
+                value={source}
+                onChange={(e) => setSource(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Date Received</Form.Label>
+              <Form.Control
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Enter details"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        )}
+        {message && <p>{message}</p>}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="outline-secondary" onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button variant="primary" onClick={handleSubmit} disabled={submitted}>
+          Add Income
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 };
 
 export default NewIncomeModal;
