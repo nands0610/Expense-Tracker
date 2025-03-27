@@ -99,3 +99,53 @@
 .add-goal-btn:hover {
     background: #0056b3;
 }
+
+/* Label when no goals are available */
+.empty-label {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+/* Remove Goal Button */
+.remove-goal-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #007bff, #035fc1); /* Red shades */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.remove-goal-btn:hover {
+    background: linear-gradient(90deg, #024996, #012c5a);
+    transform: scale(1.05);
+}
+
+/* Retry Goal Button */
+.retry-goal-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff4d4d, #ff6b6b); /* Green shades */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.retry-goal-btn:hover {
+    background: linear-gradient(90deg, #b23535, #8b2828);
+    transform: scale(1.05);
+}

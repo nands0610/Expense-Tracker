@@ -8,6 +8,8 @@ import Goals from "./components/Goals";
 import Settings from "./components/Settings";
 import Signup from "./components/Signup";
 import Incomes from "./components/Incomes";
+import Chatbot from "./components/Chatbot";
+import Plans from "./components/Plans";
 
 const App: React.FC = () => {
   return (
@@ -56,6 +58,14 @@ const App: React.FC = () => {
           element={
             <MainLayout>
               <Settings />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/plans"
+          element={
+            <MainLayout>
+              <Plans />
             </MainLayout>
           }
         />

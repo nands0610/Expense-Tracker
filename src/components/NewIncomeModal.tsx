@@ -58,7 +58,7 @@ const NewIncomeModal: React.FC<NewIncomeModalProps> = ({ show, handleClose, trig
 
             <Modal.Footer>
                 <Button variant="outline-secondary" onClick={handleClose}>Cancel</Button>
-                <Button variant="primary" onClick={handleSubmit}>💰 Add Income</Button>
+                <Button variant="primary" onClick={handleSubmit}>Add Income</Button>
             </Modal.Footer>
         </Modal>
     );

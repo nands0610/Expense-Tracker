@@ -1,0 +1,88 @@
+/* Main container for the Plans page */
+.plans-container {
+    padding: 20px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+/* Page title styling */
+.plans-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Grid layout for plan cards */
+.plan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    /* Ensures cards stay a good size */
+    gap: 20px;
+    margin-bottom: 30px;
+    justify-content: center;
+    /* Centers content if there are fewer cards */
+}
+
+@media (max-width: 768px) {
+    .plan-grid {
+        grid-template-columns: 1fr;
+        /* Stacks into one column on smaller screens */
+    }
+}
+
+/* Styling for each plan card */
+.plan-card {
+    background: #fff;
+    border-radius: 12px;
+    width: 400px;
+    min-height: 200px;
+    /* Ensures all cards have the same height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distributes content evenly */
+    padding: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensuring text content is aligned properly */
+.plan-card .plan-content {
+    flex-grow: 1;
+    /* Expands to fill space */
+}
+
+/* Recommendation text styling */
+.recommendation {
+    font-style: italic;
+    color: #555;
+    margin: 10px 0;
+}
+
+/* Ensuring buttons align at the bottom */
+/* Add New Plan button styling */
+.add-plan-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-plan-btn:hover {
+    background: linear-gradient(90deg, #7b2cbf, #3f88c5);
+}

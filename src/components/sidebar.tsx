@@ -1,4 +1,4 @@
-import { FaHome, FaFileInvoiceDollar, FaSuitcase, FaCheckCircle, FaCog, FaHeadset, FaMoneyBillWave } from "react-icons/fa";
+import { FaHome, FaFileInvoiceDollar, FaCheckCircle, FaCog, FaHeadset, FaMoneyBillWave } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -38,10 +38,10 @@ const Sidebar: React.FC<SidebarProps> = ({  }) => {
           <a href="/goals" className="nav-link"><FaCheckCircle /> Goals</a> 
         </li>
         <li className="nav-item">
-          <a href="/settings" className="nav-link"><FaCog /> Settings</a>
+          <a href="/plans" className="nav-link"><FaHeadset /> Plans</a>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link"><FaHeadset /> Support</a>
+          <a href="/settings" className="nav-link"><FaCog /> Settings</a>
         </li>
       </ul>
 
