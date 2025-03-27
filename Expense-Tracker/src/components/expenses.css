@@ -48,7 +48,7 @@
 /* Filter Form */
 .filter-form {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 

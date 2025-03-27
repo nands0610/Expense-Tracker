@@ -8,7 +8,7 @@ const Goals = () => {
         { id: 2, title: "Vacation Fund", progress: "₹15,000 saved", percent: 30 },
     ]);
 
-    const [completedGoals, setCompletedGoals] = useState([
+    const [completedGoals] = useState([
         { id: 3, title: "Buy a Laptop", date: "Jan 2025", status: "Completed" },
         { id: 4, title: "Emergency Fund", date: "Dec 2024", status: "Completed" },
     ]);

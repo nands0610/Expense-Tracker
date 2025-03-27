@@ -6,6 +6,10 @@ import "./Signup.css";
 const Signup = () => {
     const navigate = useNavigate();
 
+    const handleSignup = () => {
+        navigate("/dashboard", { state: { showMascot: true } });
+    };
+
     return (
         <div className="signup-container">
             {/* Left Section */}
@@ -44,7 +48,7 @@ const Signup = () => {
                     </div>
 
                     {/* Sign Up Button */}
-                    <button className="signup-btn" onClick={() => navigate('/dashboard')}>
+                    <button className="signup-btn" onClick={handleSignup}>
                         Sign Up
                     </button>
 
