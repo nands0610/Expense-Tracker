@@ -1,0 +1,93 @@
+/* Ensure Sidebar and Dashboard are aligned properly */
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar (Fixed Position) */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #2C3E50;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding: 20px;
+}
+
+/* Dashboard Content (Pushes to the Right) */
+.dashboard-content {
+  flex-grow: 1;
+  margin-left: 250px;
+  /* Push content to the right */
+  padding: 20px;
+  width: calc(100% - 250px);
+  /* Ensure it takes remaining space */
+  overflow-x: hidden;
+  /* Prevents unwanted horizontal scrolling */
+}
+
+
+/* Light Mode */
+body {
+  background-color: #f8f9fa;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #f4f4f4;
+}
+
+.sidebar.dark-mode {
+  background: #1e1e1e;
+}
+
+/* Cards */
+.settings-card,
+.dashboard-card,
+.goal-card,
+.expense-card,
+.trip-card {
+  background: white;
+  color: black;
+  transition: all 0.3s ease-in-out;
+}
+
+body.dark-mode .settings-card,
+body.dark-mode .dashboard-card,
+body.dark-mode .goal-card,
+body.dark-mode .expense-card,
+body.dark-mode .trip-card {
+  background: #1e1e1e;
+  color: white;
+  border: 1px solid #333;
+}
+
+/* Buttons */
+button {
+  background: #007bff;
+  color: white;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+body.dark-mode button {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode button:hover {
+  background: #666;
+}

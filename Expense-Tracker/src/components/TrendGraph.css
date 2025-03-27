@@ -1,0 +1,43 @@
+.trend-graph-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+
+
+.trend-graph-card:hover {
+    transform: translateY(-5px);
+}
+
+.custom-tooltip {
+    background: #222426;
+    /* Solid Dark Background */
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    text-align: left;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.tooltip-month {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.tooltip-text {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Small color dot next to each data type */
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}

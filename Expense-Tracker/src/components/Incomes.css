@@ -1,0 +1,26 @@
+.incomes-container {
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.income-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: var(--shadow-medium);
+    padding: 20px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.income-card:hover {
+    transform: scale(1.02);
+}
+
+.table {
+    margin-top: 10px;
+    color: var(--text-color);
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+}

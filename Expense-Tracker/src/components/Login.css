@@ -1,0 +1,181 @@
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background: url('/loginbg.jpg') no-repeat center center/cover;
+}
+
+.login-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
+    /* Dark semi-transparent overlay */
+    backdrop-filter: blur(3px);
+    /* Optional: Adds blur effect */
+    z-index: -1;
+}
+
+
+/* Left Section */
+.login-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.login-left h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.login-left p {
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* Right Section */
+.login-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Card */
+.login-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Headings */
+.login-card h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Input Fields */
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Placeholder Text */
+.login-card input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Input Focus Effect */
+.login-card input:focus {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Icons Inside Input Fields */
+.input-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* Login Options (Remember Me & Forgot Password) */
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+/* Fix alignment of "Remember Me" checkbox */
+.login-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.login-options input {
+    margin: 0;
+    transform: scale(1.1);
+    /* Slightly larger checkbox */
+}
+
+.login-options a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.login-options a:hover {
+    text-decoration: underline;
+}
+
+/* 🔥 Gradient & Glowing Login Button */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    box-shadow: 0px 4px 15px rgba(106, 17, 203, 0.6);
+    color: white;
+}
+
+.login-btn:hover {
+    background: linear-gradient(90deg, #7b2cbf, #3f88c5);
+    box-shadow: 0px 6px 20px rgba(123, 44, 191, 0.8);
+}
+
+/* Signup Link */
+.signup-link {
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.signup-link a {
+    color: #4fc3f7;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
