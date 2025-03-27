@@ -9,7 +9,7 @@ const Login = () => {
         <div className="login-container">
             {/* Left Section */}
             <div className="login-left">
-                <h1>Expense Tracker</h1>
+                <h1>BudgetBytes</h1>
                 <p>Manage your finances effortlessly with our smart tracking system.</p>
             </div>
 
@@ -43,7 +43,7 @@ const Login = () => {
 
                     {/* Signup Link */}
                     <p className="signup-link">
-                        Don't have an account? <a href="#">Sign up</a>
+                        Don't have an account? <a href="/signup">Sign up</a>
                     </p>
                 </div>
             </div>

@@ -14,7 +14,24 @@ const initialExpenses: Expense[] = [
     { id: 2, date: "2024-03-05", category: "Transport", amount: 200 },
     { id: 3, date: "2024-03-10", category: "Entertainment", amount: 800 },
     { id: 4, date: "2024-03-15", category: "Shopping", amount: 1000 },
+    { id: 5, date: "2024-03-20", category: "Groceries", amount: 1500 },
+    { id: 6, date: "2024-03-25", category: "Bills", amount: 2500 },
+    { id: 7, date: "2024-04-02", category: "Food", amount: 700 },
+    { id: 8, date: "2024-04-07", category: "Transport", amount: 300 },
+    { id: 9, date: "2024-04-12", category: "Healthcare", amount: 1200 },
+    { id: 10, date: "2024-04-17", category: "Entertainment", amount: 600 },
+    { id: 11, date: "2024-04-22", category: "Education", amount: 2000 },
+    { id: 12, date: "2024-04-27", category: "Shopping", amount: 1800 },
+    { id: 13, date: "2024-05-03", category: "Food", amount: 900 },
+    { id: 14, date: "2024-05-08", category: "Transport", amount: 250 },
+    { id: 15, date: "2024-05-14", category: "Travel", amount: 5000 },
+    { id: 16, date: "2024-05-20", category: "Bills", amount: 2300 },
+    { id: 17, date: "2024-05-28", category: "Healthcare", amount: 1500 },
+    { id: 18, date: "2024-06-05", category: "Entertainment", amount: 1100 },
+    { id: 19, date: "2024-06-10", category: "Shopping", amount: 1300 },
+    { id: 20, date: "2024-06-15", category: "Education", amount: 2500 }
 ];
+
 
 const Expenses: React.FC = () => {
     const [expenses, setExpenses] = useState<Expense[]>(initialExpenses);
@@ -89,7 +106,7 @@ const Expenses: React.FC = () => {
                             {filteredExpenses.map((expense) => (
                                 <tr key={expense.id}>
                                     <td>{expense.date}</td>
-                                    <td className={`category ${expense.category.toLowerCase()}`}>
+                                    <td>
                                         {expense.category}
                                     </td>
                                     <td>₹{expense.amount}</td>

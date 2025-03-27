@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Trips from "./components/Trips";
 import Goals from "./components/Goals";
 import Settings from "./components/Settings";
+import Signup from "./components/Signup";
+import Incomes from "./components/Incomes";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +15,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
 
         {/* Wrap all routes needing sidebar inside MainLayout */}
         <Route
@@ -32,10 +36,10 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path="/trips"
+          path="/incomes"
           element={
             <MainLayout>
-              <Trips />
+              <Incomes />
             </MainLayout>
           }
         />

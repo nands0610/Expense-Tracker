@@ -32,15 +32,6 @@ const NewGoalModal: React.FC<NewGoalModalProps> = ({ show, handleClose }) => {
                         <Form.Control type="date" className="form-control-custom" />
                     </Form.Group>
 
-                    {/* Priority Level */}
-                    <Form.Group className="mb-3">
-                        <Form.Label className="form-label-custom">Priority</Form.Label>
-                        <Form.Select className="form-control-custom">
-                            <option value="high">🔥 High</option>
-                            <option value="medium">⚡ Medium</option>
-                            <option value="low">⏳ Low</option>
-                        </Form.Select>
-                    </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>

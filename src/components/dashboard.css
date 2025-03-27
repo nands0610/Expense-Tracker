@@ -16,15 +16,14 @@
 .card-custom {
     border-radius: 12px;
     /* Smooth rounded corners */
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
     /* Subtle shadow */
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .card-custom:hover {
     transform: translateY(-3px);
-    /* Slight lift on hover */
-    box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.15);
+    box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.5);
 }
 
 .chart-card {
@@ -143,20 +142,7 @@
 }
 
 /* ============ Card Styling ============ */
-.card-custom {
-    border-radius: 12px;
-    padding: 16px;
-    border: 2px solid #e0e0e0;
-    background: #fff;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
-    /* Medium shadow */
-}
 
-.card-custom:hover {
-    box-shadow: 0px 10px 24px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
 
 /* ============ Sidebar Shadow ============ */
 .sidebar {
@@ -220,13 +206,6 @@
 }
 
 /* ============ Card Shadows ============ */
-.card-custom {
-    border-radius: 12px;
-    padding: 16px;
-    border: 2px solid #e0e0e0;
-    background: #fff;
-    transition: all 0.3s ease-in-out;
-}
 
 .shadow-light {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
@@ -329,4 +308,61 @@
     padding: 20px;
     width: calc(100% - 250px);
     /* Adjust width dynamically */
+}
+
+.trend-graph-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.trend-graph-title {
+    font-size: 1.3rem;
+    color: #ffcc00;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.trend-graph-card {
+    background: #1a1a2e;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+}
+
+.trend-graph-card:hover {
+    transform: translateY(-5px);
+}
+
+.custom-tooltip {
+    background: #c8cdd2;
+    /* Solid Dark Background */
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    text-align: left;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.tooltip-month {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.tooltip-text {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Small color dot next to each data type */
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
 }

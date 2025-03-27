@@ -1,22 +1,21 @@
-import { FaHome, FaFileInvoiceDollar, FaSuitcase, FaCheckCircle, FaCog, FaHeadset } from "react-icons/fa";
+import { FaHome, FaFileInvoiceDollar, FaSuitcase, FaCheckCircle, FaCog, FaHeadset, FaMoneyBillWave } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import "./Sidebar.css";
 
 interface SidebarProps {
-  toggleDarkMode?: () => void;  // Made optional (?)
-  darkMode?: boolean;  // Made optional (?)
+  toggleDarkMode: () => void;
+  darkMode: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ toggleDarkMode, darkMode }) => {
+const Sidebar: React.FC<SidebarProps> = ({  }) => {
   const navigate = useNavigate();
-
   return (
     
     <div className="sidebar">
       {/* Website Name */}
-      <h2 className="website-name">ExpenseTracker</h2>
+      <h2 className="website-name">BudgetBytes</h2>
       {/* Profile Section */}
       <div className="profile-section">
         <img src="/profile.jpg" alt="User Profile" className="profile-pic" />
@@ -31,8 +30,9 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleDarkMode, darkMode }) => {
         <li className="nav-item">
           <a href="/expenses" className="nav-link"><FaFileInvoiceDollar /> Expenses</a>
         </li>
+
         <li className="nav-item">
-          <a href="/trips" className="nav-link"><FaSuitcase /> Trips</a>
+          <a href="/incomes" className="nav-link"><FaMoneyBillWave /> Incomes</a> 
         </li>
         <li className="nav-item">
           <a href="/goals" className="nav-link"><FaCheckCircle /> Goals</a> 
