@@ -1,10 +1,14 @@
-import React from "react";
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa"; // Import icons
+import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 const Signup = () => {
     const navigate = useNavigate();
+    
+    const handleSignup = () => {
+        navigate("/dashboard", { state: { showMascot: true } });
+    };
+    
 
     return (
         <div className="signup-container">
@@ -44,7 +48,7 @@ const Signup = () => {
                     </div>
 
                     {/* Sign Up Button */}
-                    <button className="signup-btn" onClick={() => navigate('/dashboard')}>
+                    <button className="signup-btn" onClick={handleSignup}>
                         Sign Up
                     </button>
 

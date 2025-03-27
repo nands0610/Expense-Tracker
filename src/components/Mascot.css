@@ -1,0 +1,69 @@
+.mascot-container {
+    position: fixed;
+    bottom: -180px;
+    /* Starts off-screen */
+    right: 33px;
+    z-index: 9999;
+    transition: transform 1.2s ease-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.mascot-container.show {
+    opacity: 1;
+    transform: translateY(-180px);
+    /* Moves up into view */
+}
+
+.mascot-image {
+    width: 200px;
+    /* Bigger mascot */
+    height: auto;
+}
+
+/* Speech Bubble */
+.speech-bubble {
+    position: absolute;
+    bottom: 130px;
+    /* Adjusts above mascot */
+    right: 100%;
+    /* Positions left of mascot */
+    background: #efeded;
+    padding: 11px 18px;
+    /* More padding for clarity */
+    border-radius: 12px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    /* Slightly stronger shadow */
+    font-size: 15px;
+    color: #222;
+    /* Darker text for contrast */
+    white-space: nowrap;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Speech Bubble Arrow */
+.speech-bubble::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -12px;
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 11px solid #efeded;
+    transform: translateY(-50%);
+}
+
+
+/* Fade-out animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

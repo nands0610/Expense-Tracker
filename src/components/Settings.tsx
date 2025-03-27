@@ -11,7 +11,8 @@ const Settings = () => {
     const [currency, setCurrency] = useState("INR");
     const [name, setName] = useState("Nanditha S");
     const [email, setEmail] = useState("nanditha@example.com");
-    const [password, setPassword] = useState("");
+    const [currentPassword, setCurrentPassword] = useState(""); // Added field
+    const [newPassword, setNewPassword] = useState("");
 
     // Apply dark mode class
     useEffect(() => {
@@ -86,17 +87,28 @@ const Settings = () => {
             <Card className="settings-card">
                 <Card.Body>
                     <h5>🔒 Change Password</h5>
-                    <Form.Group>
+
+                    <Form.Group className="mb-3">
+                        <Form.Label>Current Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Enter current password"
+                            value={currentPassword}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
                         <Form.Label>New Password</Form.Label>
                         <Form.Control
                             type="password"
                             placeholder="Enter new password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
                         />
                     </Form.Group>
 
-                    <Button variant="primary" className="mt-3">Update Password</Button>
+                    <Button variant="primary">Update Password</Button>
                 </Card.Body>
             </Card>
 
