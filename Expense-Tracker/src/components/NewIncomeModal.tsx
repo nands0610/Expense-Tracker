@@ -6,9 +6,10 @@ interface NewIncomeModalProps {
   show: boolean;
   handleClose: () => void;
   triggerConfetti: () => void;
+  triggerMascot: () => void;  // New prop to trigger mascot
 }
 
-const NewIncomeModal: React.FC<NewIncomeModalProps> = ({ show, handleClose, triggerConfetti }) => {
+const NewIncomeModal: React.FC<NewIncomeModalProps> = ({ show, handleClose, triggerConfetti, triggerMascot }) => {
   const [amount, setAmount] = useState("");
   const [source, setSource] = useState("");
   const [date, setDate] = useState("");
@@ -17,14 +18,15 @@ const NewIncomeModal: React.FC<NewIncomeModalProps> = ({ show, handleClose, trig
   const [message, setMessage] = useState("");
 
   const handleSubmit = async () => {
-    // Prevent duplicate submissions
     if (submitted) return;
-    
+
     try {
       const response = await addIncome({ date, amount, source, description });
       setMessage(response.message);
       setSubmitted(true);
       triggerConfetti();
+      triggerMascot(); // Show mascot when income is added successfully
+
       setTimeout(() => {
         setSubmitted(false);
         setMessage("");

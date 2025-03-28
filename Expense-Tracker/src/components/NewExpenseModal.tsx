@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { addExpense } from "../api";
+import Mascot from "./OverbudgetMascot";
 
 interface NewExpenseModalProps {
   show: boolean;
@@ -13,6 +14,7 @@ const NewExpenseModal: React.FC<NewExpenseModalProps> = ({ show, handleClose }) 
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [message, setMessage] = useState("");
+  const [showMascot, setShowMascot] = useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -21,7 +23,8 @@ const NewExpenseModal: React.FC<NewExpenseModalProps> = ({ show, handleClose }) 
       setTimeout(() => {
         setMessage("");
         handleClose();
-      }, 2000);
+      }, 2000)
+      {showMascot && <Mascot show={showMascot} />};
     } catch (err: any) {
       setMessage(err.response?.data?.error || "Failed to add expense.");
     }

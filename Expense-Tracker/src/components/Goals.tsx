@@ -19,12 +19,12 @@ const Goals = () => {
     ]);
 
     // Function to remove goal from ongoing goals
-    const removeOngoingGoal = (id) => {
+    const removeOngoingGoal = (id: number) => {
         setOngoingGoals(ongoingGoals.filter(goal => goal.id !== id));
     };
 
     // Function to retry an unachieved goal (moves it to ongoing)
-    const retryUnachievedGoal = (id) => {
+    const retryUnachievedGoal = (id: number) => {
         const goalToRetry = unachievedGoals.find(goal => goal.id === id);
         if (goalToRetry) {
             const newOngoingGoal = {

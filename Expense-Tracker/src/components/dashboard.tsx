@@ -26,6 +26,8 @@ const Dashboard = () => {
   const [showReminderModal, setShowReminderModal] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showMascot, setShowMascot] = useState(false);
+  const [showOBMascot, setShowOBMascot] = useState(false);
+
 
   const [monthlyIncome, setMonthlyIncome] = useState(0);
   const [monthlyExpenses, setMonthlyExpenses] = useState(0);

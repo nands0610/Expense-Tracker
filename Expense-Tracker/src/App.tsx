@@ -10,12 +10,14 @@ import Signup from "./components/Signup";
 import Incomes from "./components/Incomes";
 import Chatbot from "./components/Chatbot";
 import Plans from "./components/Plans";
+import LandingPage from "./components/LandingPage";
 
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/land" />} />
+        <Route path="/land" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
@@ -66,6 +68,14 @@ const App: React.FC = () => {
           element={
             <MainLayout>
               <Plans />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/landing"
+          element={
+            <MainLayout>
+              <LandingPage />
             </MainLayout>
           }
         />
