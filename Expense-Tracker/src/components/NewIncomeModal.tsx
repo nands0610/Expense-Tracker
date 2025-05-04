@@ -6,17 +6,10 @@ interface NewIncomeModalProps {
   show: boolean;
   handleClose: () => void;
   triggerConfetti: () => void;
-<<<<<<< HEAD
-  triggerMascot: () => void;  // New prop to trigger mascot
-}
-
-const NewIncomeModal: React.FC<NewIncomeModalProps> = ({ show, handleClose, triggerConfetti, triggerMascot }) => {
-=======
   triggerIncomeMascot: () => void;  // New prop
 }
 
 const NewIncomeModal: React.FC<NewIncomeModalProps> = ({ show, handleClose, triggerConfetti, triggerIncomeMascot }) => {
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
   const [amount, setAmount] = useState("");
   const [source, setSource] = useState("");
   const [date, setDate] = useState("");
@@ -32,12 +25,7 @@ const NewIncomeModal: React.FC<NewIncomeModalProps> = ({ show, handleClose, trig
       setMessage(response.message);
       setSubmitted(true);
       triggerConfetti();
-<<<<<<< HEAD
-      triggerMascot(); // Show mascot when income is added successfully
-
-=======
       triggerIncomeMascot();  // Trigger the income mascot
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
       setTimeout(() => {
         setSubmitted(false);
         setMessage("");

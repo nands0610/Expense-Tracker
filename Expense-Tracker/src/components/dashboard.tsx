@@ -29,13 +29,7 @@ const Dashboard = () => {
   const [showReminderModal, setShowReminderModal] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showMascot, setShowMascot] = useState(false);
-<<<<<<< HEAD
-  const [showOBMascot, setShowOBMascot] = useState(false);
-
-
-=======
   const [showIncomeMascot, setShowIncomeMascot] = useState(false);
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
   const [monthlyIncome, setMonthlyIncome] = useState(0);
   const [monthlyExpenses, setMonthlyExpenses] = useState(0);
   const [expenseBreakdown, setExpenseBreakdown] = useState<{ category: string; value: number }[]>([]);

@@ -9,11 +9,7 @@ const IncomeMascot = () => {
             setShowBubble(false); // Hide after 7 seconds
         }, 7000);
 
-<<<<<<< HEAD
         return () => clearTimeout(timer); // Cleanup when unmounted
-=======
-        return () => clearTimeout(timer);
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
     }, []);
 
     return (
@@ -30,8 +26,4 @@ const IncomeMascot = () => {
     );
 };
 
-<<<<<<< HEAD
 export default IncomeMascot;
-=======
-export default IncomeMascot;
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)

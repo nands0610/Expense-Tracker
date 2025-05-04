@@ -11,13 +11,8 @@ const LandingPage: React.FC = () => {
             <nav className="navbar">
                 <div className="logo">BudgetBytes</div>
                 <ul className="nav-links">
-<<<<<<< HEAD
-                    <li><a href = '/signup'>Sign up</a></li>
-                    <li><a href = '/login'>Log in</a></li>
-=======
                     <li><a href='/signup'>Sign up</a></li>
                     <li><a href='/login'>Log in</a></li>
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
 
                 </ul>
             </nav>
@@ -25,22 +20,6 @@ const LandingPage: React.FC = () => {
             {/* Hero Section */}
             <section className="hero">
                 <Container>
-<<<<<<< HEAD
-                <Row className="align-items-center">
-                    <Col md={5} className="hero-text">  {/* Reduce text width */}
-                        <h1 className="hero-title">Take Control of Your Finances</h1>
-                        <p className="hero-subtitle">
-                        With BudgetBytes, managing your money has never been easier. Our smart expense tracking and budgeting tools help you understand your spending habits, set achievable financial goals, and plan for the future—all in one place.
-                        </p>
-                        <Button variant="primary" className="hero-btn" onClick={() => navigate('/signup')}>Get Started</Button>
-                        <p className="trusted-text">Trusted by 10+ users</p>
-
-                    </Col>
-                    <Col md={7} className="hero-image-wrapper">  {/* Increase image width */}
-                        <img src="/hero-image.png" alt="Finance Management" className="hero-image" />
-                    </Col>
-                </Row>
-=======
                     <Row className="align-items-center">
                         <Col md={5} className="hero-text">  {/* Reduce text width */}
                             <h1 className="hero-title">Take Control of Your Finances</h1>
@@ -55,7 +34,6 @@ const LandingPage: React.FC = () => {
                             <img src="/hero-image.png" alt="Finance Management" className="hero-image" />
                         </Col>
                     </Row>
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
 
                 </Container>
             </section>
@@ -126,8 +104,4 @@ const LandingPage: React.FC = () => {
     );
 };
 
-<<<<<<< HEAD
 export default LandingPage;
-=======
-export default LandingPage;
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)

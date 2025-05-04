@@ -11,21 +11,13 @@ import Incomes from "./components/Incomes";
 import Chatbot from "./components/Chatbot";
 import Plans from "./components/Plans";
 import LandingPage from "./components/LandingPage";
-<<<<<<< HEAD
-=======
 import RemindersTab from "./components/RemindersTab";
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
 
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-<<<<<<< HEAD
-        <Route path="/" element={<Navigate to="/land" />} />
-        <Route path="/land" element={<LandingPage />} />
-=======
         <Route path="/" element={<Navigate to="/landing" />} />
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/landing" element={<LandingPage />} />
@@ -81,17 +73,10 @@ const App: React.FC = () => {
           }
         />
         <Route
-<<<<<<< HEAD
-          path="/landing"
-          element={
-            <MainLayout>
-              <LandingPage />
-=======
           path="/reminders"
           element={
             <MainLayout>
               <RemindersTab />
->>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
             </MainLayout>
           }
         />
