@@ -1,33 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Card, Container, Button } from "react-bootstrap";
-import "./Incomes.css"; // Import styles
+import { getIncomes, deleteIncome } from "../api"; // Adjust path if necessary
+import "./Incomes.css";
 
 const Incomes: React.FC = () => {
-    // State to store current and past incomes
-    const [currentMonthIncomes, setCurrentMonthIncomes] = useState([
-        { id: 1, source: "Freelance Project", amount: 5000, date: "2025-03-10" },
-        { id: 2, source: "Part-time Job", amount: 3000, date: "2025-03-15" }
-    ]);
+    const [currentMonthIncomes, setCurrentMonthIncomes] = useState<any[]>([]);
+    const [pastIncomes, setPastIncomes] = useState<any[]>([]);
 
-    const [pastIncomes, setPastIncomes] = useState([
-        { id: 3, source: "Internship", amount: 8000, date: "2025-02-05" },
-        { id: 4, source: "Freelance Work", amount: 4500, date: "2025-01-20" },
-        { id: 5, source: "Tutoring", amount: 2500, date: "2024-12-15" },
-        { id: 6, source: "Online Course Sales", amount: 12000, date: "2024-11-30" },
-        { id: 7, source: "YouTube Ad Revenue", amount: 5600, date: "2024-10-25" },
-        { id: 8, source: "Stock Dividends", amount: 3000, date: "2024-09-10" },
-        { id: 9, source: "Consulting", amount: 9000, date: "2024-08-18" },
-        { id: 10, source: "Graphic Design Projects", amount: 6500, date: "2024-07-12" },
-        { id: 11, source: "Blog Sponsorship", amount: 4800, date: "2024-06-05" },
-        { id: 12, source: "Affiliate Marketing", amount: 7200, date: "2024-05-22" }
-    ]);
+    useEffect(() => {
+        const fetchIncomes = async () => {
+            try {
+                const incomes = await getIncomes();
+                // Separate incomes based on current month
+                const now = new Date();
+                const currentMonth = now.getMonth();
+                const currentYear = now.getFullYear();
 
-    // Function to remove an income entry
-    const handleDeleteIncome = (id: number, isCurrent: boolean) => {
-        if (isCurrent) {
-            setCurrentMonthIncomes(currentMonthIncomes.filter(income => income.id !== id));
-        } else {
-            setPastIncomes(pastIncomes.filter(income => income.id !== id));
+                const current = incomes.filter((income: any) => {
+                    const incomeDate = new Date(income.date);
+                    return incomeDate.getMonth() === currentMonth && incomeDate.getFullYear() === currentYear;
+                });
+                const past = incomes.filter((income: any) => {
+                    const incomeDate = new Date(income.date);
+                    return !(incomeDate.getMonth() === currentMonth && incomeDate.getFullYear() === currentYear);
+                });
+
+                setCurrentMonthIncomes(current);
+                setPastIncomes(past);
+            } catch (error) {
+                console.error("Error fetching incomes:", error);
+            }
+        };
+
+        fetchIncomes();
+    }, []);
+
+    const handleDeleteIncome = async (id: string, isCurrent: boolean) => {
+        try {
+            await deleteIncome(id);
+            if (isCurrent) {
+                setCurrentMonthIncomes(currentMonthIncomes.filter(income => income.id !== id));
+            } else {
+                setPastIncomes(pastIncomes.filter(income => income.id !== id));
+            }
+        } catch (error) {
+            console.error("Error deleting income:", error);
         }
     };
 

@@ -1,5 +1,5 @@
 // src/components/Sidebar.tsx
-import { FaHome, FaFileInvoiceDollar, FaCheckCircle, FaCog, FaHeadset, FaMoneyBillWave } from "react-icons/fa";
+import { FaHome, FaFileInvoiceDollar, FaCheckCircle, FaCog, FaHeadset, FaMoneyBillWave, FaBell } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
@@ -47,6 +47,9 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleDarkMode, darkMode }) => {
         </li>
         <li className="nav-item">
           <a href="/plans" className="nav-link"><FaHeadset /> Plans</a>
+        </li>
+        <li className="nav-item">
+          <a href="/reminders" className="nav-link"><FaBell /> Reminders</a>
         </li>
         <li className="nav-item">
           <a href="/settings" className="nav-link"><FaCog /> Settings</a>

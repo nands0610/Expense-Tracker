@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button, Card, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Button, Card, Spinner, Form, InputGroup } from "react-bootstrap";
 import { FaChartLine, FaWallet } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import Confetti from "react-confetti";
@@ -16,7 +16,10 @@ import {
   getMonthlyExpenses,
   getExpenseBreakdown,
   getExpensesLast6Months,
+  getUserSavingsPercentage,
+  updateSavingsPercentage
 } from "../api";
+import IncomeMascot from "./IncomeMascot";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -26,13 +29,18 @@ const Dashboard = () => {
   const [showReminderModal, setShowReminderModal] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showMascot, setShowMascot] = useState(false);
+<<<<<<< HEAD
   const [showOBMascot, setShowOBMascot] = useState(false);
 
 
+=======
+  const [showIncomeMascot, setShowIncomeMascot] = useState(false);
+>>>>>>> 08fa801 (Backend + Frontend: Linking of backend with frontend with additional functionalities to frontend)
   const [monthlyIncome, setMonthlyIncome] = useState(0);
   const [monthlyExpenses, setMonthlyExpenses] = useState(0);
   const [expenseBreakdown, setExpenseBreakdown] = useState<{ category: string; value: number }[]>([]);
   const [expensesLast6Months, setExpensesLast6Months] = useState<{ month: string; Expenses: number }[]>([]);
+  const [savingsPercentage, setSavingsPercentage] = useState<number>(0);
   const [loading, setLoading] = useState(true);
 
   const fetchDashboardData = async () => {
@@ -42,11 +50,13 @@ const Dashboard = () => {
       const expensesData = await getMonthlyExpenses();
       const breakdownData = await getExpenseBreakdown();
       const last6MonthsData = await getExpensesLast6Months();
+      const savingsData = await getUserSavingsPercentage();
 
       setMonthlyIncome(incomeData.total_income);
       setMonthlyExpenses(expensesData.total_expenses);
       setExpenseBreakdown(breakdownData);
-      // Optionally, convert month numbers to month abbreviations.
+      setSavingsPercentage(savingsData.savings_percentage);
+
       const formattedLast6Months = last6MonthsData.map((item: any) => {
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         return {
@@ -72,7 +82,6 @@ const Dashboard = () => {
     }
   }, [location.state]);
 
-  // Modal close handler: refresh dashboard data if new record added.
   const handleModalClose = (refresh: boolean = false) => {
     if (refresh) {
       fetchDashboardData();
@@ -83,9 +92,31 @@ const Dashboard = () => {
     setShowReminderModal(false);
   };
 
+  const handleSavingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setSavingsPercentage(isNaN(value) ? 0 : value);
+  };
+
+  const handleUpdateSavings = async () => {
+    try {
+      const response = await updateSavingsPercentage(savingsPercentage);
+      // Optionally, you could show a success message here
+      console.log(response.message);
+    } catch (error) {
+      console.error("Error updating savings percentage:", error);
+    }
+  };
+
+  // Function to trigger IncomeMascot when new income is added
+  const triggerIncomeMascot = () => {
+    setShowIncomeMascot(true);
+    setTimeout(() => setShowIncomeMascot(false), 5000); // Show for 5 seconds
+  };
+
   return (
     <div className="dashboard-container">
       {showMascot && <Mascot show={showMascot} />}
+      {showIncomeMascot && <IncomeMascot />}  {/* Render IncomeMascot if triggered */}
       <div className="dashboard-content">
         <Container fluid className="p-4">
           {showConfetti && (
@@ -122,6 +153,33 @@ const Dashboard = () => {
                         <p>₹{monthlyIncome.toFixed(2)}</p>
                       </div>
                       <FaWallet size={30} color="#007bff" className="card-icon" />
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+
+              {/* Savings Target Section */}
+              <Row className="mt-3">
+                <Col md={12}>
+                  <Card className="card-custom shadow-lg">
+                    <Card.Body>
+                      <Card.Title>Savings Target</Card.Title>
+                      <InputGroup>
+                        <Form.Control
+                          type="number"
+                          min="0"
+                          max="100"
+                          value={savingsPercentage}
+                          onChange={handleSavingsChange}
+                        />
+                        <InputGroup.Text>%</InputGroup.Text>
+                        <Button variant="primary" onClick={handleUpdateSavings}>
+                          Update
+                        </Button>
+                      </InputGroup>
+                      <small className="text-muted">
+                        Enter the percentage of your income you want to save.
+                      </small>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -194,6 +252,7 @@ const Dashboard = () => {
               setShowConfetti(true);
               setTimeout(() => setShowConfetti(false), 5000);
             }}
+            triggerIncomeMascot={triggerIncomeMascot}  // Pass down the trigger function
           />
           <NewGoalModal show={showGoalModal} handleClose={(refresh: boolean) => handleModalClose(refresh)} />
           <ReminderModal

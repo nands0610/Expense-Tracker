@@ -7,7 +7,9 @@ import os
 from dotenv import load_dotenv
 from flask_cors import CORS
 from bson import ObjectId
-from dateutil.relativedelta import relativedelta  # For last 6 months calculations
+from dateutil.relativedelta import relativedelta
+import pandas as pd
+from prophet import Prophet
 
 # Load environment variables from .env file
 load_dotenv()
@@ -38,7 +40,7 @@ reminders = db["reminders"]
 def generate_token(user):
     """Generate a JWT token that expires in 30 minutes using user's _id and email."""
     payload = {
-        "sub": str(user['_id']),  # Use _id as a stable identifier
+        "sub": str(user['_id']),
         "email": user['email'],
         "exp": datetime.now(timezone.utc) + timedelta(minutes=30)
     }
@@ -424,6 +426,337 @@ def expenses_last_6_months_endpoint():
         for item in results
     ]
     return jsonify(formatted), 200
+
+@app.route('/expenses', methods=['GET'])
+def get_expenses():
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+
+    query = {"user_id": user_id}
+    category = request.args.get("category")
+    if category:
+        query["category"] = category
+    min_amount = request.args.get("min_amount")
+    max_amount = request.args.get("max_amount")
+    if min_amount or max_amount:
+        query["amount"] = {}
+        if min_amount:
+            try:
+                query["amount"]["$gte"] = float(min_amount)
+            except ValueError:
+                pass
+        if max_amount:
+            try:
+                query["amount"]["$lte"] = float(max_amount)
+            except ValueError:
+                pass
+        if not query["amount"]:
+            query.pop("amount")
+    start_date_str = request.args.get("start_date")
+    end_date_str = request.args.get("end_date")
+    if start_date_str or end_date_str:
+        query["date"] = {}
+        if start_date_str:
+            start_date = validate_date(start_date_str)
+            if start_date:
+                query["date"]["$gte"] = start_date
+        if end_date_str:
+            end_date = validate_date(end_date_str)
+            if end_date:
+                query["date"]["$lte"] = end_date
+        if not query["date"]:
+            query.pop("date")
+    
+    expenses_list = list(expenses.find(query))
+    formatted = []
+    for exp in expenses_list:
+        formatted.append({
+            "id": str(exp["_id"]),
+            "date": exp["date"].strftime("%Y-%m-%d") if isinstance(exp["date"], datetime) else exp["date"],
+            "category": exp.get("category", ""),
+            "amount": exp.get("amount", 0)
+        })
+    return jsonify(formatted), 200
+
+@app.route('/deleteExpense/<expense_id>', methods=['DELETE'])
+def delete_expense(expense_id):
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    result = expenses.delete_one({"_id": ObjectId(expense_id), "user_id": user_id})
+    if result.deleted_count == 0:
+        return jsonify({"error": "Expense not found or unauthorized"}), 404
+    return jsonify({"message": "Expense deleted successfully."}), 200
+
+@app.route('/api/reminders', methods=['GET'])
+def get_reminders_endpoint():
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+         return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+         return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    
+    reminders_cursor = reminders.find({"user_id": user_id})
+    reminders_list = list(reminders_cursor)
+    formatted = []
+    for rem in reminders_list:
+         formatted.append({
+              "id": str(rem["_id"]),
+              "name": rem.get("title", ""),  # using 'title' from DB, but returning as 'name'
+              "date": rem["due_date"].strftime("%Y-%m-%d") if isinstance(rem["due_date"], datetime) else rem["due_date"]
+         })
+    return jsonify(formatted), 200
+
+@app.route('/api/reminders/<reminder_id>', methods=['DELETE'])
+def delete_reminder_endpoint(reminder_id):
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+         return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+         return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    result = reminders.delete_one({"_id": ObjectId(reminder_id), "user_id": user_id})
+    if result.deleted_count == 0:
+         return jsonify({"error": "Reminder not found or unauthorized"}), 404
+    return jsonify({"message": "Reminder deleted successfully."}), 200
+
+@app.route('/goals', methods=['GET'])
+def get_goals():
+    # Authenticate the user
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+
+    user_id = payload.get("sub")
+    
+    # Retrieve all goals for the logged-in user
+    goals_cursor = goals.find({"user_id": user_id})
+    goals_list = list(goals_cursor)
+    
+    # Debug: Print out the raw goals from the database
+    print("Raw goals from DB:", goals_list)
+    
+    now = datetime.now()
+    ongoing = []
+    completed = []
+    unachieved = []
+    
+    # Classify each goal based on saved_amount, target_amount, and deadline
+    for goal in goals_list:
+        # Get deadline as a datetime, if available
+        deadline = goal.get("deadline")
+        if deadline and isinstance(deadline, datetime):
+            deadline_dt = deadline
+        else:
+            deadline_dt = None
+        
+        saved = goal.get("saved_amount", 0)
+        target = goal.get("target_amount", 0)
+        
+        # If saved amount meets or exceeds target and target > 0, mark as completed.
+        if saved >= target and target > 0:
+            completed.append(goal)
+        # If a deadline exists, has passed, and the goal is not met, mark as unachieved.
+        elif deadline_dt and deadline_dt < now and saved < target:
+            unachieved.append(goal)
+        else:
+            ongoing.append(goal)
+    
+    # Function to format goal data for the front end.
+    def format_goal(goal):
+        return {
+            "id": str(goal["_id"]),
+            "title": goal.get("goal_name", ""),  # Ensure your goal documents have a "goal_name" field
+            "target": goal.get("target_amount", 0),
+            "saved": goal.get("saved_amount", 0),
+            "deadline": goal["deadline"].strftime("%Y-%m-%d") if goal.get("deadline") and isinstance(goal["deadline"], datetime) else None
+        }
+    
+    return jsonify({
+        "ongoing": [format_goal(g) for g in ongoing],
+        "completed": [format_goal(g) for g in completed],
+        "unachieved": [format_goal(g) for g in unachieved]
+    }), 200
+
+@app.route('/getIncomes', methods=['GET'])
+def get_incomes():
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    incomes_list = list(income.find({"user_id": user_id}))
+    formatted = []
+    for inc in incomes_list:
+        formatted.append({
+            "id": str(inc["_id"]),
+            "date": inc["date"].strftime("%Y-%m-%d") if isinstance(inc["date"], datetime) else inc["date"],
+            "source": inc.get("source", ""),
+            "amount": inc.get("amount", 0),
+            "description": inc.get("description", "")
+        })
+    return jsonify(formatted), 200
+
+@app.route('/deleteIncome/<income_id>', methods=['DELETE'])
+def delete_income(income_id):
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    result = income.delete_one({"_id": ObjectId(income_id), "user_id": user_id})
+    if result.deleted_count == 0:
+        return jsonify({"error": "Income not found or unauthorized"}), 404
+    return jsonify({"message": "Income deleted successfully."}), 200
+
+# --------------------------
+# AI Endpoints
+# --------------------------
+@app.route('/aiBudgetTips', methods=['GET'])
+def ai_budget_tips():
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    
+    now = datetime.now()
+    start_of_month = datetime(now.year, now.month, 1)
+    
+    monthly_income = sum(i["amount"] for i in income.find({
+        "user_id": user_id,
+        "date": {"$gte": start_of_month}
+    }))
+    
+    if monthly_income == 0:
+        return jsonify({"tips": ["⚠️ No income data found for this month. Please add your income to get budgeting insights."]}), 200
+
+    user = users_collection.find_one({"_id": ObjectId(user_id)})
+    savings_percentage = user.get("savings_percentage", 0)
+    monthly_budget = monthly_income * (1 - savings_percentage / 100)
+    
+    user_expenses = list(expenses.find({
+        "user_id": user_id,
+        "date": {"$gte": start_of_month}
+    }))
+    total_expenses = sum(exp["amount"] for exp in user_expenses)
+    budget_usage = (total_expenses / monthly_budget) * 100 if monthly_budget != 0 else 0
+
+    tips = [f"📈 You've used {budget_usage:.2f}% of your monthly budget (₹{monthly_budget:.2f})."]
+
+    category_spend = {}
+    for exp in user_expenses:
+        category = exp.get("category", "Other")
+        category_spend[category] = category_spend.get(category, 0) + exp["amount"]
+
+    if category_spend:
+        high_category = max(category_spend, key=category_spend.get)
+        tips.append(f"🔎 Your biggest expense is {high_category} (₹{category_spend[high_category]:.2f}).")
+
+    if total_expenses > monthly_budget:
+        tips.append("🚨 Warning: You have exceeded your monthly budget!")
+    
+    return jsonify({"tips": tips}), 200
+
+@app.route('/aiFutureExpensePrediction', methods=['GET'])
+def ai_future_expense_prediction():
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    
+    expense_list = list(expenses.find({"user_id": user_id}).sort("date", 1))
+    if len(expense_list) < 5:
+        return jsonify({"prediction": "⚠️ Not enough data for accurate prediction."}), 200
+
+    df = pd.DataFrame(expense_list)
+    df['date'] = pd.to_datetime(df['date'])
+    df['ds'] = df['date']
+    df['y'] = df['amount']
+
+    model = Prophet()
+    model.fit(df[['ds', 'y']])
+    future = model.make_future_dataframe(periods=30)
+    forecast = model.predict(future)
+    next_month_prediction = forecast.iloc[-1]['yhat']
+
+    prediction_msg = f"🔮 Prophet Prediction: Your estimated expense next month is ₹{next_month_prediction:.2f}."
+    return jsonify({"prediction": prediction_msg}), 200
+
+@app.route('/getUserSavingsPercentage', methods=['GET'])
+def get_user_savings_percentage():
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    user = users_collection.find_one({"_id": ObjectId(user_id)})
+    if not user:
+        return jsonify({"error": "User not found."}), 404
+    savings_percentage = user.get("savings_percentage", 0)
+    return jsonify({"savings_percentage": savings_percentage}), 200
+
+@app.route('/updateSavingsPercentage', methods=['PUT'])
+def update_savings_percentage():
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return jsonify({"error": "Authorization header missing"}), 401
+    token = auth_header.split(" ")[1]
+    payload = decode_token(token)
+    if not payload:
+        return jsonify({"error": "Invalid or expired token"}), 401
+    user_id = payload.get("sub")
+    data = request.get_json()
+    try:
+        savings_percentage = float(data.get("savings_percentage"))
+    except (TypeError, ValueError):
+        return jsonify({"error": "Invalid savings percentage."}), 400
+
+    users_collection.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$set": {"savings_percentage": savings_percentage}}
+    )
+    return jsonify({
+        "message": "Savings percentage updated successfully.",
+        "savings_percentage": savings_percentage
+    }), 200
 
 @app.route('/ping', methods=['GET'])
 def ping():

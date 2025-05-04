@@ -90,4 +90,88 @@ export const getExpensesLast6Months = async () => {
   return response.data;
 };
 
+export const getExpenses = async (filters: any = {}) => {
+    const token = localStorage.getItem('token');
+    const response = await api.get('/expenses', {
+      headers: { Authorization: `Bearer ${token}` },
+      params: filters
+    });
+    return response.data;
+  };
+
+  export const getIncomes = async () => {
+    const token = localStorage.getItem('token');
+    const response = await api.get('/getIncomes', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  };
+  
+  export const deleteIncome = async (incomeId: string) => {
+    const token = localStorage.getItem('token');
+    const response = await api.delete(`/deleteIncome/${incomeId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  };
+
+  export const deleteExpense = async (expenseId: string) => {
+    const token = localStorage.getItem('token');
+    const response = await api.delete(`/deleteExpense/${expenseId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  };
+
+  export const getAIBudgetTips = async () => {
+    const token = localStorage.getItem('token');
+    const response = await api.get('/aiBudgetTips', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  };
+  
+  export const getAIFutureExpensePrediction = async () => {
+    const token = localStorage.getItem('token');
+    const response = await api.get('/aiFutureExpensePrediction', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  };
+
+  export const getReminders = async () => {
+    const response = await axios.get("/api/reminders");
+    return response.data;
+  };
+  
+  export const removeReminder = async (id: string) => {
+    await axios.delete(`/api/reminders/${id}`);
+  };  
+
+  export const getUserSavingsPercentage = async () => {
+    const token = localStorage.getItem('token');
+    const response = await api.get('/getUserSavingsPercentage', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  };
+
+  export const getGoals = async () => {
+    const token = localStorage.getItem("token");
+    const response = await axios.get("/goals", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  };
+  
+  export const updateSavingsPercentage = async (savingsPercentage: number) => {
+    const token = localStorage.getItem('token');
+    const response = await api.put(
+      '/updateSavingsPercentage',
+      { savings_percentage: savingsPercentage },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response.data;
+  };
+
 export default api;
