@@ -69,6 +69,28 @@ This solution targets individuals seeking control over their finances without th
 * **Backend:** Python with Flask and Axios for client‑server communication
 * **Database:** MongoDB for persistent data storage
 
+
+---
+
+## Screenshots
+
+![image](https://github.com/user-attachments/assets/df0a0c44-2c42-494a-8fdc-af293bd3d465)
+![image](https://github.com/user-attachments/assets/4c8d1be8-737b-43cf-81ce-915cc8bb7c94)
+![image](https://github.com/user-attachments/assets/49a4fdfb-caca-4d7f-b017-30028de52d49)
+![image](https://github.com/user-attachments/assets/28884c4b-0f54-467e-8f5f-59ca3a6e59ce)
+![image](https://github.com/user-attachments/assets/d80b7028-b24b-4aea-9303-fd185e46d7a4)
+![image](https://github.com/user-attachments/assets/6003eb09-65cf-4a2d-b831-21c4f6833b64)
+![image](https://github.com/user-attachments/assets/5eb0a3d4-f1b6-488c-8f58-441bd4eaf80a)
+![image](https://github.com/user-attachments/assets/1edf9507-c606-4d2f-8590-dbe44c553abe)
+![image](https://github.com/user-attachments/assets/16dd2c90-7456-48a7-bd96-f09ae422201a)
+![image](https://github.com/user-attachments/assets/56503512-b6ab-4fa5-8532-351c9030d8e2)
+![image](https://github.com/user-attachments/assets/544f777c-696e-497d-b7f6-28ab4f6cfb03)
+![image](https://github.com/user-attachments/assets/76b0da73-dc5e-40fb-a460-db14fb48c19e)
+![image](https://github.com/user-attachments/assets/f8172a1c-07d5-4e51-b7d8-aee6d8aea638)
+
+
+---
+
 ## 🗂️ Project Structure
 
 ```
