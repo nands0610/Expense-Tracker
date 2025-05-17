@@ -45,11 +45,18 @@ This solution targets individuals seeking control over their finances without th
 
 * **AI Chatbot**:
 
+  * Toggleable chat window accessible via a floating button.
+  * Embedded via an <iframe> pointing to a Chatbase chatbot service for instant conversational assistance.
+  * Handles natural-language queries and offers personalized budgeting advice.
+  * Styled and controlled with React state (useState) and custom CSS for seamless user experience.
+    
   * Natural-language interface for on-demand queries:
 
     * Sample prompts: “Show my top three expenses this month,” “Did I stay under my food budget?”
   * Context-aware recommendations, e.g., suggesting ways to reduce recurring costs.
   * Learning over time: remembers user preferences (e.g., preferred categories) to tailor responses.
+ 
+
 
 ---
 
