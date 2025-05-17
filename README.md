@@ -1,6 +1,6 @@
-# Byte Me: AI-Enhanced Expense Tracker
+# AI-Enhanced Expense Tracker
 
-Byte Me helps users effortlessly track and manage their personal expenses through intuitive interfaces, insightful analytics, and a conversational AI assistant.
+The Expense Tracker helps users effortlessly track and manage their personal expenses through intuitive interfaces, insightful analytics, and a conversational AI assistant.
 
 ---
 
@@ -81,20 +81,81 @@ This solution targets individuals seeking control over their finances without th
 
 ## Screenshots
 
-![image](https://github.com/user-attachments/assets/df0a0c44-2c42-494a-8fdc-af293bd3d465)
-![image](https://github.com/user-attachments/assets/4c8d1be8-737b-43cf-81ce-915cc8bb7c94)
-![image](https://github.com/user-attachments/assets/49a4fdfb-caca-4d7f-b017-30028de52d49)
-![image](https://github.com/user-attachments/assets/28884c4b-0f54-467e-8f5f-59ca3a6e59ce)
-![image](https://github.com/user-attachments/assets/d80b7028-b24b-4aea-9303-fd185e46d7a4)
-![image](https://github.com/user-attachments/assets/6003eb09-65cf-4a2d-b831-21c4f6833b64)
-![image](https://github.com/user-attachments/assets/5eb0a3d4-f1b6-488c-8f58-441bd4eaf80a)
-![image](https://github.com/user-attachments/assets/1edf9507-c606-4d2f-8590-dbe44c553abe)
-![image](https://github.com/user-attachments/assets/16dd2c90-7456-48a7-bd96-f09ae422201a)
-![image](https://github.com/user-attachments/assets/56503512-b6ab-4fa5-8532-351c9030d8e2)
-![image](https://github.com/user-attachments/assets/544f777c-696e-497d-b7f6-28ab4f6cfb03)
-![image](https://github.com/user-attachments/assets/76b0da73-dc5e-40fb-a460-db14fb48c19e)
-![image](https://github.com/user-attachments/assets/f8172a1c-07d5-4e51-b7d8-aee6d8aea638)
+### 1. **Login Page**  
+   User authentication screen with email/password fields.
 
+![Screenshot 2025-05-04 172343](https://github.com/user-attachments/assets/43f7bd9e-61df-4b2c-acc9-3af443d32a75)
+
+### 2. **Main Dashboard**  
+   Overview with buttons to add/view incomes, expenses, reminders, goals and summary charts.
+
+![Screenshot 2025-05-04 172449](https://github.com/user-attachments/assets/901602ff-91fd-4330-bf1c-d96322747c60)
+
+### 3. **Add New Expense**  
+   Form to input a new expense entry (amount, category, date).
+
+![Screenshot 2025-05-04 172543](https://github.com/user-attachments/assets/db543dab-fac1-4d81-9f51-b9c08c897a21)
+
+### 4. **Add New Income**  
+   Form to log a new income entry (source, amount, date).
+
+![Screenshot 2025-05-04 172558](https://github.com/user-attachments/assets/f4395969-63d6-4f41-9a2b-a13f21a94c33)
+
+### 5. **Dashboard Celebration**  
+   Confetti animation celebrating a successfully added income.
+
+![Screenshot 2025-05-04 172624](https://github.com/user-attachments/assets/c02dbb90-a43e-4558-8f0b-9cf970521d69)
+
+### 6. **Set New Goal**  
+   Interface for defining and tracking a financial savings goal.
+
+![Screenshot 2025-05-04 172654](https://github.com/user-attachments/assets/2d906a18-e24e-422f-9828-321800cc51cb)
+
+### 7. **Add New Reminder**  
+   Scheduler for creating upcoming payment or budget reminders.
+
+![Screenshot 2025-05-04 172710](https://github.com/user-attachments/assets/285ad718-70af-44f6-a2ee-932857180ee5)
+
+### 8. **Expenses Page**  
+   List of past expenses with filters for category, date, and amount.
+
+![Screenshot 2025-05-04 172728](https://github.com/user-attachments/assets/65fe1c78-e8e9-496f-b380-1fd047b2a02b)
+
+### 9. **Incomes Page**  
+   Current month’s total income summary with history of past entries.
+
+![Screenshot 2025-05-04 172803](https://github.com/user-attachments/assets/1d2dbc82-e803-4e87-872a-5fe1faeafb61)
+
+### 10. **Goals Page**  
+    View of ongoing, completed, and unachieved financial goals.
+
+![Screenshot 2025-05-04 172826](https://github.com/user-attachments/assets/513683e8-b7f2-4e6e-9400-fc81f5899b06)
+
+### 11. **AI Financial Insights**  
+    AI‑powered prediction of next month’s expenses based on your history.
+
+![Screenshot 2025-05-04 172908](https://github.com/user-attachments/assets/091328fd-3280-413f-88aa-d910f0eb03c6)
+
+### 12. **Chatbot Advice**  
+    Interactive chatbot offering real‑time, personalized financial tips.
+    
+![Screenshot 2025-05-04 173031](https://github.com/user-attachments/assets/b9d3b814-510e-4156-8782-006b59baedd1)
+
+---
+
+## 🔌 Key API Endpoints
+
+- **POST** `/login` – authenticate and receive a JWT.  
+- **POST** `/signup` – create a new user account.  
+- **GET**  `/monthlyIncome` & `/monthlyExpenses` – grab your totals for the current month.  
+- **POST** `/addIncome` & `/addExpense` – record an income or an expense.
+- **GET**  `/getIncomes` – list all your income entries.  
+- **GET**  `/expenses` – list all your expense entries (supports filters).
+- **DELETE** `/deleteIncome/:incomeId` – remove an income entry by ID.  
+- **DELETE** `/deleteExpense/:expenseId` – remove an expense entry by ID.  
+- **GET**  `/expenseBreakdown` – see your spend broken out by category.  
+- **GET**  `/aiBudgetTips` – fetch AI‑powered budgeting advice.  
+- **PUT**  `/updateSavingsPercentage` – set your target savings rate.  
 
 ---
 
