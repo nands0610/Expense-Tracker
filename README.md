@@ -6,7 +6,7 @@ The Expense Tracker helps users effortlessly track and manage their personal exp
 
 ## 🚀 Project Overview
 
-Daily expense tracking can be tedious and prone to error. Byte Me streamlines this by offering:
+Daily expense tracking can be tedious and prone to error. The Expense Tracker streamlines this by offering:
 
 * **Quick Expense Entry**: Log purchases with minimal steps.
 * **Automated Categorization**: Assign spending to categories for clarity.
